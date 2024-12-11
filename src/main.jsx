@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import GlobalState from './context/index.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter basename='/anime-vault'>
     {/* <StrictMode> */}
       <GlobalState>
         <App />
