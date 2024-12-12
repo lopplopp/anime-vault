@@ -12,8 +12,9 @@ export default function SeasonalAnime() {
   const [loading, setLoading] = useState(true);
   const page = useRef(1);
   const animeData = useRef();
-  const { currentSeasonTime } = useContext(GlobalContext);
+  const { currentSeasonTime, screenSize } = useContext(GlobalContext);
   let nextSeason;
+
 
   const seasonList = ["winter", "spring", "summer", "fall"];
 
@@ -92,8 +93,10 @@ export default function SeasonalAnime() {
                           }`
                     }
                   >
-                    <p className="mx-24 hover:bg-gray-500">
-                      {season === seasonList[0]
+                    <p className={screenSize.width<800
+                      ?"m-1 p-2 hover:bg-gray-500 rounded-md flex justify-center items-center"
+                      :"mx-24 hover:bg-gray-500 flex justify-center items-center"
+                    }>                      {season === seasonList[0]
                         ? `${parseInt(year) - 1} ${seasonList[3]}`
                         : `${year} ${
                             seasonList[seasonList.indexOf(season) - 1]
@@ -101,8 +104,10 @@ export default function SeasonalAnime() {
                     </p>
                   </Link>
 
-                  <p className="bg-slate-200 text-black mx-24">
-                    {year + " " + season}
+                  <p className={screenSize.width<800
+                  ?"bg-slate-200 text-black m-1 p-2 rounded-md flex justify-center items-center"
+                  :"bg-slate-200 text-black mx-24 flex justify-center items-center"
+                  }>                    {year + " " + season}
                   </p>
                   <Link
                     to={
@@ -115,8 +120,10 @@ export default function SeasonalAnime() {
                           }`
                     }
                   >
-                    <p className="mx-24 hover:bg-gray-500">
-                      {season === seasonList[3]
+                    <p className={screenSize.width<800
+                      ?"m-1 p-2 hover:bg-gray-500 rounded-md flex justify-center items-center"
+                      :"mx-24 hover:bg-gray-500 flex justify-center items-center"
+                    }>                      {season === seasonList[3]
                         ? `${parseInt(year) + 1} ${seasonList[0]}`
                         : `${year} ${
                             seasonList[seasonList.indexOf(season) + 1]
@@ -124,11 +131,14 @@ export default function SeasonalAnime() {
                     </p>
                   </Link>
                 </div>
+                
                 <div className="relative">
                   <Tabs list={animeList} />
                   {loadmore ? (
-                    <div className="absolute flex justify-center items-center bottom-0 w-full h-1/2 bg-gradient-to-b from-transparent via-black/95 to-black z-30">
-                      <button
+                    <div className={screenSize.width<800
+                    ?"absolute flex justify-center items-center bottom-0 w-full h-1/6 bg-gradient-to-b from-transparent via-[rgb(34,34,34)]/95 to-[rgb(34,34,34)] z-30"
+                    :"absolute flex justify-center items-center bottom-0 w-full h-1/2 bg-gradient-to-b from-transparent via-[rgb(34,34,34)]/95 to-[rgb(34,34,34)] z-30"
+                  }>                      <button
                         onClick={loadmoreAnime}
                         className="bg-purple-600 p-2 mb-8 rounded-lg"
                       >

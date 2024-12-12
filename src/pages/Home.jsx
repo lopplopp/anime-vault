@@ -4,7 +4,7 @@ import Tabs from "../components/tabs/tabs";
 import ReactLoading from "https://cdn.skypack.dev/react-loading@2.0.3";
 
 export default function Home() {
-  const { topCurrent, topUpcoming, topAnime } = useContext(GlobalContext);
+  const { topCurrent, topUpcoming, topAnime, screenSize } = useContext(GlobalContext);
   const [loadmoreTop, setLoadmoreTop] = useState(true);
   const [loadmoreUpcoming, setLoadmoreUpcoming] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -31,12 +31,13 @@ export default function Home() {
           <div className="">
             <Tabs list={topCurrent} listType={"Top Current"} />
           </div>
-          <div className="grid grid-cols-2">
+          <div className={screenSize.width<800?"flex flex-col justify-center items-center"
+            :"grid grid-cols-2"}>
             <div>
               {loadmoreTop ? (
                 <div className="relative flex">
                   <Tabs list={topAnime.slice(0, 6)} listType={"Top Anime"} />
-                  <div className="absolute flex justify-center items-center bottom-0 w-full h-1/6 bg-gradient-to-b from-transparent via-black/95 to-black z-30">
+                  <div className="absolute flex justify-center items-center bottom-0 w-full h-1/6 bg-gradient-to-b from-transparent via-[rgb(34,34,34)]/95 to-[rgb(34,34,34)] z-30">
                     <button
                       onClick={() => setLoadmoreTop(false)}
                       className="bg-purple-600 p-2 mb-8 rounded-lg"
@@ -53,7 +54,7 @@ export default function Home() {
               {loadmoreUpcoming ? (
                 <div className="relative flex">
                   <Tabs list={topUpcoming.slice(0, 6)} listType={"Top Anime"} />
-                  <div className="absolute flex justify-center items-center bottom-0 w-full h-1/6 bg-gradient-to-b from-transparent via-black/95 to-black z-30">
+                  <div className="absolute flex justify-center items-center bottom-0 w-full h-1/6 bg-gradient-to-b from-transparent via-[rgb(34,34,34)]/95 to-[rgb(34,34,34)] z-30">
                     <button
                       onClick={() => setLoadmoreUpcoming(false)}
                       className="bg-purple-600 p-2 mb-8 rounded-lg"

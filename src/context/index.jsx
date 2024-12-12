@@ -7,6 +7,10 @@ export default function GlobalState({ children }) {
   const [topUpcoming, setTopUpcoming] = useState([]);
   const [topAnime, setTopAnime] = useState([]);
   const [currentSeasonTime, setCurrentSeasonTime] = useState();
+  const [screenSize, setScreenSize] = useState({
+    width:window.innerWidth,
+    height: window.innerHeight,
+  })
 
 
   const [error, setError] = useState(null);
@@ -51,15 +55,32 @@ export default function GlobalState({ children }) {
     }
   }
 
+  function handleResize() {
+    setScreenSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    })
+  }
+
   useEffect(() => {
     fetchTopCurrent();
     fetchTopUpcoming();
     fetchTopRating();
   }, []);
 
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+
+
   return (
     <GlobalContext.Provider
-      value={{ topCurrent, topUpcoming, topAnime, error, currentSeasonTime}}
+      value={{ topCurrent, topUpcoming, topAnime, error, currentSeasonTime, screenSize}}
     >
       {children}
     </GlobalContext.Provider>

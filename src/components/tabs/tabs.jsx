@@ -11,7 +11,7 @@ export default function Tabs({ list, listType }) {
       className={
         listType === "Top Current"
           ? "flex flex-col mx-5 my-10"
-          : "flex flex-col mx-5 my-10"
+          : "flex flex-col mx-5 my-10 items-center"
       }
     >
       <h1 className={" text-xl font-extrabold text-white"}>{listType}</h1>
@@ -19,7 +19,7 @@ export default function Tabs({ list, listType }) {
         className={
           listType === "Top Current"
             ? "overflow-x-scroll scrollbar-hidden grid grid-flow-col"
-            : "flex flex-wrap"
+            : "flex flex-wrap justify-center"
         }
         {...events}
         ref={ref}
