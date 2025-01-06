@@ -5,7 +5,6 @@ import ReactLoading from "https://cdn.skypack.dev/react-loading@2.0.3";
 import { useContext } from "react";
 import { GlobalContext } from "../context";
 
-
 export default function CurrentSeasonalPage() {
   const [seasonAnime, setSeasonAnime] = useState([]);
   const [loadmore, setLoadmore] = useState(false);
@@ -16,7 +15,7 @@ export default function CurrentSeasonalPage() {
   const season = useRef();
   const seasonList = ["winter", "spring", "summer", "fall"];
   const [loading, setLoading] = useState(true);
-  const {screenSize} = useContext(GlobalContext)
+  const { screenSize } = useContext(GlobalContext);
 
   async function fetchCurrentSeason() {
     let current = [];
@@ -79,18 +78,22 @@ export default function CurrentSeasonalPage() {
               <div>
                 <div className="grid grid-cols-3 justify-center text-center text-lg font-semibold ">
                   <Link
+                  onClick={() => console.log(season === seasonList[0])}
                     to={
                       season === seasonList[0]
-                        ? `/season/${year.current - 1}/${seasonList[3]}`
-                        : `/season/${year.current}/${
+                        ?`/season/${year.current}/${
                             seasonList[seasonList.indexOf(season.current) - 1]
-                          }`
+                          }` 
+                        : `/season/${year.current - 1}/${seasonList[3]}`
                     }
                   >
-                    <p className={screenSize.width<800
-                      ?"m-1 hover:bg-gray-500 rounded-md flex justify-center items-center"
-                      :"mx-24 hover:bg-gray-500 flex justify-center items-center"
-                    }>
+                    <p
+                      className={
+                        screenSize.width < 800
+                          ? "m-1 hover:bg-gray-500 rounded-md flex justify-center items-center"
+                          : "mx-24 hover:bg-gray-500 flex justify-center items-center"
+                      }
+                    >
                       {season.current === seasonList[0]
                         ? `${year.current - 1} ${seasonList[3]}`
                         : `${year.current} ${
@@ -99,20 +102,26 @@ export default function CurrentSeasonalPage() {
                     </p>
                   </Link>
 
-                  <p className={screenSize.width<800
-                  ?"bg-slate-200 text-black m-1 rounded-md flex justify-center items-center"
-                  :"bg-slate-200 text-black mx-24 flex justify-center items-center"
-                  }>
+                  <p
+                    className={
+                      screenSize.width < 800
+                        ? "bg-slate-200 text-black m-1 rounded-md flex justify-center items-center"
+                        : "bg-slate-200 text-black mx-24 flex justify-center items-center"
+                    }
+                  >
                     {year.current + " " + season.current}
                   </p>
                 </div>
                 <div className="relative">
                   <Tabs list={seasonAnime} />
                   {loadmore ? (
-                  <div className={screenSize.width<800
-                    ?"absolute flex justify-center items-center bottom-0 w-full h-1/6 bg-gradient-to-b from-transparent via-[rgb(34,34,34)]/95 to-[rgb(34,34,34)] z-30"
-                    :"absolute flex justify-center items-center bottom-0 w-full h-1/2 bg-gradient-to-b from-transparent via-[rgb(34,34,34)]/95 to-[rgb(34,34,34)] z-30"
-                  }>
+                    <div
+                      className={
+                        screenSize.width < 800
+                          ? "absolute flex justify-center items-center bottom-0 w-full h-1/6 bg-gradient-to-b from-transparent via-[rgb(34,34,34)]/95 to-[rgb(34,34,34)] z-30"
+                          : "absolute flex justify-center items-center bottom-0 w-full h-1/2 bg-gradient-to-b from-transparent via-[rgb(34,34,34)]/95 to-[rgb(34,34,34)] z-30"
+                      }
+                    >
                       <button
                         onClick={loadmoreAnime}
                         className="bg-purple-600 p-2 mb-8 rounded-lg"
